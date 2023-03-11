@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/10 16:35:45 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/11 18:15:02 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 
 int	main(int ac, char **av)
 {
-	char *env_args[] = { (char*)0 };
-
+	char	*env_args[] = { NULL };
+	char	*command;
+	int		size = ft_strlen("/usr/bin/") + ft_strlen(av[1]) + 1;
+	
+	command = ft_calloc(1, size);
+	av[ac] = NULL;
 	if (ac == 1)
 		exit (0);
 	execve(av[1], av, env_args);
-	ft_printf("av: %s\n", av[1]);
+	ft_strlcat(command, "/usr/bin/", size);
+	ft_strlcat(command, av[1], size);
+	command[size] = 0;
+	ft_printf("%s\n", command);
+	ft_printf("av: %d\n", execve(command, av, env_args));
+	free(command);
 	return (1);
 }
