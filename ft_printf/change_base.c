@@ -41,8 +41,8 @@ char	*change_base(unsigned long long nbr, char arg)
 		base = "0123456789abcdef";
 		if (arg == 'X')
 			base = "0123456789ABCDEF";
-		if (nbr < 0)
-			nbr *= -1;
+		/* if (nbr < 0)
+			nbr *= -1; */
 		i = 0;
 		while (nbr > 0)
 		{

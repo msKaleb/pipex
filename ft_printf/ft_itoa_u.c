@@ -36,18 +36,18 @@ char	*ft_itoa_u(unsigned int n)
 {
 	unsigned int	number;
 	int				digits;
-	long			neg;
+	//long			neg;
 	char			*str;
 
-	neg = 0;
+	//neg = 0;
 	digits = count_digits(n);
 	str = ft_calloc(1, digits + 1);
 	number = (unsigned int) n;
-	if (n < 0)
+	/* if (n < 0)
 	{
 		number = number * -1;
 		neg = 1;
-	}
+	} */
 	if (!str)
 		return (NULL);
 	while (digits--)

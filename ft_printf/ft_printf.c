@@ -17,8 +17,8 @@ static int	print_adr(unsigned long long p)
 	char	*s;
 	int		ret;
 
-	if (p < 0)
-		p = p * -1;
+/* 	if (p < 0)
+		p = p * -1; */
 	s = change_base(p, 'p');
 	write(1, "0x", 2);
 	ret = write(1, s, ft_strlen(s)) + 1;

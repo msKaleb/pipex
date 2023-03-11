@@ -12,8 +12,13 @@
 
 #include "./ft_printf/ft_printf.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	ft_printf("test printf: %d\n", 57);
+	char *env_args[] = { (char*)0 };
+
+	if (ac == 1)
+		exit (0);
+	execve(av[1], av, env_args);
+	ft_printf("av: %s\n", av[1]);
 	return (1);
 }
