@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 16:14:08 by msoria-j          #+#    #+#              #
-#    Updated: 2023/03/10 16:34:53 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/03/22 13:21:29 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,20 +25,26 @@ SUBDIRS		=	ft_printf
 
 FT_PRINTF	=	$(SUBDIRS)/libftprintf.a
 
+ifndef VERBOSE
+#	MAKEFLAGS += --silent
+	MAKEFLAGS += --no-print-directory
+endif
+
+									  
 $(NAME):		$(OBJS)
 				@make -C $(SUBDIRS)
 #				mv $(FT_PRINTF)
-				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(FT_PRINTF)
+				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(FT_PRINTF)
 
 all:			$(NAME)
 
 clean:
 				@make clean -C $(SUBDIRS)
-				$(RM) $(OBJS)
+				@$(RM) $(OBJS)
 
 fclean:			clean
 				@make fclean -C $(SUBDIRS)
-				$(RM) $(NAME)
+				@$(RM) $(NAME)
 
 re:				fclean $(NAME)
 
