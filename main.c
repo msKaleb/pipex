@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/22 21:04:39 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/22 21:15:04 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	main(int argc, char **argv, char **envp)
 		ft_printf("arg: %s\n", args[j]); */
 		
 	j = -1;
-	nl();
 	while (path_array[++j])
 	{
 		//ft_printf("path: %s\n", path_array[j]);
