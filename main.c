@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/24 15:11:17 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:45:42 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,14 @@ int	main(int argc, char **argv, char **envp)
 	while (args[j++])
 		ft_printf("arg: %s\n", args[j]); */
 	
+	wait(NULL); // para esperar a que termine el proceso hijo, mirar el retorno de wait
 	/* recorro el bucle de paths buscando el adecuado,
 	si no lo encuentra, libera cmd */
 	if (id == 0){
 		dup2(infile, STDIN_FILENO);
 		close(infile);
 		j = -1;
-		ft_printf("child: %d\n", id);
+		// ft_printf("child: %d\n", id);
 		while (path_array[++j])
 		{
 			//ft_printf("path: %s\n", path_array[j]);
@@ -77,7 +78,7 @@ int	main(int argc, char **argv, char **envp)
 			free(cmd);
 		}
 	}else{
-		// ft_printf("parent: 5d\n", id);
+		ft_printf("parent: %d\n", id);
 		
 	}
 	return (1);
