@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/23 23:13:49 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:11:17 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ int	main(int argc, char **argv, char **envp)
 	char	*cmd;
 	
 	int		i, j;
-	int		fd[2];
+	int		pipe_fd[2];
+	int		infile;
 	int		id;
 	
-	pipe(fd);
+	infile = open(argv[1], O_RDONLY);
+	pipe(pipe_fd);
 	id = fork();
 	
 	if (argc < 2)
@@ -61,6 +63,8 @@ int	main(int argc, char **argv, char **envp)
 	/* recorro el bucle de paths buscando el adecuado,
 	si no lo encuentra, libera cmd */
 	if (id == 0){
+		dup2(infile, STDIN_FILENO);
+		close(infile);
 		j = -1;
 		ft_printf("child: %d\n", id);
 		while (path_array[++j])
@@ -73,7 +77,8 @@ int	main(int argc, char **argv, char **envp)
 			free(cmd);
 		}
 	}else{
-		ft_printf("parent: 5d\n", id);
+		// ft_printf("parent: 5d\n", id);
+		
 	}
 	return (1);
 }
