@@ -14,6 +14,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <errno.h>
+#include <sys/wait.h>
 
 void	nl(void)
 {
@@ -30,14 +32,14 @@ int	main(int argc, char **argv, char **envp)
 	
 	int		i, j;
 	int		pipe_fd[2];
-	int		infile;
+	int		infile, outfile; // valdría solo con uno??
 	int		id;
 	
 	infile = open(argv[1], O_RDONLY);
 	pipe(pipe_fd);
 	id = fork();
 	
-	if (argc < 2)
+	if (argc < 3)
 		exit (0);
 	i = 0;
 	/* busco la línea con las rutas (paths) */
@@ -60,12 +62,19 @@ int	main(int argc, char **argv, char **envp)
 	while (args[j++])
 		ft_printf("arg: %s\n", args[j]); */
 	
-	wait(NULL); // para esperar a que termine el proceso hijo, mirar el retorno de wait
+	while (wait(NULL) != -1 || errno != ECHILD); // para esperar a que termine el proceso hijo, mirar el retorno de wait
 	/* recorro el bucle de paths buscando el adecuado,
 	si no lo encuentra, libera cmd */
 	if (id == 0){
+		close(pipe_fd[0]);
 		dup2(infile, STDIN_FILENO);
 		close(infile);
+
+		/* creo un archivo temporal para usarlo como input para el siguiente comando */
+		outfile = open("tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		dup2(outfile, STDOUT_FILENO);
+		close(outfile);
+
 		j = -1;
 		// ft_printf("child: %d\n", id);
 		while (path_array[++j])
@@ -78,8 +87,31 @@ int	main(int argc, char **argv, char **envp)
 			free(cmd);
 		}
 	}else{
-		ft_printf("parent: %d\n", id);
-		
+		// ft_printf("parent: %d\n", id);
+		j = -1;
+		while (args[++j])
+			free(args[j]);
+		free(args);
+		args = ft_split(argv[3], ' ');
+
+		// abrir temporal para usar como input
+		infile = open("tmp", O_RDONLY);
+		dup2(infile, STDIN_FILENO);
+		close(infile);
+
+		// archivo para output del segundo comando
+		// ft_printf("output file: %s\n", argv[4]);
+		outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		dup2(outfile, STDOUT_FILENO);
+		close(outfile);
+
+		j = -1;
+		while (path_array[++j])
+		{
+			cmd = ft_strjoin(ft_strjoin(path_array[j], "/"), args[0]);
+			execve(cmd, args, path_array);
+			free(cmd);
+		}
 	}
 	return (1);
 }
