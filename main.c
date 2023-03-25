@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/24 15:45:42 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/25 19:24:31 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ int	main(int argc, char **argv, char **envp)
 	
 	int		i, j;
 	int		pipe_fd[2];
-	int		infile, outfile; // valdría solo con uno??
+	int		file;
 	int		id;
 	
-	infile = open(argv[1], O_RDONLY);
+	file = open(argv[1], O_RDONLY);
 	pipe(pipe_fd);
 	id = fork();
 	
-	if (argc < 3)
+	if (argc < 5)
 		exit (0);
 	i = 0;
 	/* busco la línea con las rutas (paths) */
@@ -50,30 +50,25 @@ int	main(int argc, char **argv, char **envp)
 	path_line = ft_substr(envp[i], 5, ft_strlen(envp[i]));
 	/* creo un array de strings con los paths */
 	path_array = ft_split(path_line, ':');
-	/* creo un array de strings con los argumentos del primer comando
-	(este método no funciona con ls, usar pipe()??) */
-	/* argv[2] = ft_strjoin(argv[2], " <");
-	argv[2] = ft_strjoin(argv[2], argv[1]); */
-	// ft_printf("args: %s\n", argv[2]);
+	/* creo un array de strings con los argumentos del segundo comando */
 	args = ft_split(argv[2], ' ');
 	
 	/* comprobar argumentos */
-/* 	j = -1;
-	while (args[j++])
-		ft_printf("arg: %s\n", args[j]); */
+	// j = -1;
+	// while (args[j++])
+	// 	ft_printf("arg: %s\n", args[j]);
 	
 	while (wait(NULL) != -1 || errno != ECHILD); // para esperar a que termine el proceso hijo, mirar el retorno de wait
 	/* recorro el bucle de paths buscando el adecuado,
 	si no lo encuentra, libera cmd */
-	if (id == 0){
+	if (id == 0)
+	{
 		close(pipe_fd[0]);
-		dup2(infile, STDIN_FILENO);
-		close(infile);
-
-		/* creo un archivo temporal para usarlo como input para el siguiente comando */
-		outfile = open("tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		dup2(outfile, STDOUT_FILENO);
-		close(outfile);
+		dup2(file, STDIN_FILENO);
+		close(file);
+		
+		dup2(pipe_fd[1], STDOUT_FILENO);
+		close(pipe_fd[1]);
 
 		j = -1;
 		// ft_printf("child: %d\n", id);
@@ -86,24 +81,25 @@ int	main(int argc, char **argv, char **envp)
 			// perror(0); // for debugging
 			free(cmd);
 		}
-	}else{
+	}
+	else
+	{
 		// ft_printf("parent: %d\n", id);
+		close(pipe_fd[1]);
 		j = -1;
 		while (args[++j])
 			free(args[j]);
 		free(args);
 		args = ft_split(argv[3], ' ');
 
-		// abrir temporal para usar como input
-		infile = open("tmp", O_RDONLY);
-		dup2(infile, STDIN_FILENO);
-		close(infile);
+		dup2(pipe_fd[0], STDIN_FILENO);
+		close(pipe_fd[0]);
 
 		// archivo para output del segundo comando
 		// ft_printf("output file: %s\n", argv[4]);
-		outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		dup2(outfile, STDOUT_FILENO);
-		close(outfile);
+		file = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		dup2(file, STDOUT_FILENO);
+		close(file);
 
 		j = -1;
 		while (path_array[++j])
