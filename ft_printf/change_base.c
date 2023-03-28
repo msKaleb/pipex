@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_base.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:20:31 by msoria-j          #+#    #+#             */
-/*   Updated: 2022/12/20 13:09:08 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/28 11:08:08 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ char	*change_base(unsigned long long nbr, char arg)
 		base = "0123456789abcdef";
 		if (arg == 'X')
 			base = "0123456789ABCDEF";
-		/* if (nbr < 0)
-			nbr *= -1; */
 		i = 0;
 		while (nbr > 0)
 		{

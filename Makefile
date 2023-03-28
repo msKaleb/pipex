@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42urduliz.co    +#+  +:+       +#+         #
+#    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 16:14:08 by msoria-j          #+#    #+#              #
-#    Updated: 2023/03/22 13:21:29 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/03/28 12:28:04 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		=	pipex
 CC			=	gcc
 
 SRCS		=	main.c \
-#			ft_pipex.c \
+				ft_split_args.c \
 
 CFLAGS		=	-Wall -Werror -Wextra
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_u.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:54:27 by msoria-j          #+#    #+#             */
-/*   Updated: 2022/12/15 17:34:47 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/28 11:08:47 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,11 @@ char	*ft_itoa_u(unsigned int n)
 {
 	unsigned int	number;
 	int				digits;
-	//long			neg;
 	char			*str;
 
-	//neg = 0;
 	digits = count_digits(n);
 	str = ft_calloc(1, digits + 1);
 	number = (unsigned int) n;
-	/* if (n < 0)
-	{
-		number = number * -1;
-		neg = 1;
-	} */
 	if (!str)
 		return (NULL);
 	while (digits--)

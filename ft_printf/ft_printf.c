@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:32:26 by msoria-j          #+#    #+#             */
-/*   Updated: 2022/12/20 13:11:15 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/28 11:08:19 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static int	print_adr(unsigned long long p)
 	char	*s;
 	int		ret;
 
-/* 	if (p < 0)
-		p = p * -1; */
 	s = change_base(p, 'p');
 	write(1, "0x", 2);
 	ret = write(1, s, ft_strlen(s)) + 1;
