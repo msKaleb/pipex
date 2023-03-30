@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 19:37:32 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/29 17:55:38 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/30 15:00:46 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ typedef struct s_descriptors
 	int		fork_id;
 }				t_descriptors;
 
-void	exit_error(t_paths *p, char *str);
+void	exit_error(t_paths *p, char *str, int err_code);
 void	free_structs(t_paths *p, int flag);
 void	exec_cmd(t_paths *p);
 void	exec_child(t_descriptors d, t_paths *p);
 void	exec_parent(t_descriptors d, t_paths *p);
 char	**ft_split_args(char *str);
-int		ft_wordcount(char *str);
-int		get_length(char *str);
+/* int		ft_wordcount(char *str);
+int		get_length(char *str); */
 
 #endif

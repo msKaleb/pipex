@@ -6,13 +6,13 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:36 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/28 12:35:07 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:52:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	ft_wordcount(char *str)
+static int	ft_wordcount(char *str)
 {
 	int		isstr;
 	int		strnumber;
@@ -41,7 +41,7 @@ int	ft_wordcount(char *str)
 	return (strnumber);
 }
 
-int	get_length(char *str)
+static int	get_length(char *str)
 {
 	int	len;
 
@@ -54,9 +54,43 @@ int	get_length(char *str)
 		len++;
 		return (len);
 	}
+	if (str[len] == 34)
+	{
+		len++;
+		while (str[len] != 34 && str[len])
+			len++;
+		len++;
+		return (len);
+	}
 	while (str[len] != 32 && str[len])
 		len++;
 	return (len);
+}
+
+static char *ft_trim_quotes(char *str)
+{
+	char 	*tmp;
+	int		check;
+
+	check = ft_strlen(ft_strchr(str, 34)) - ft_strlen(ft_strchr(str, 39));
+	ft_printf("len: %d\n", check);
+	if (check == -1)
+	{
+		//puta mierda
+	}
+	if (ft_strchr(str, 34) || check == 1)
+	{
+		tmp = ft_strtrim(str, "\"");
+		free(str);
+		return (tmp);
+	}
+	if (ft_strchr(str, 39))
+	{
+		tmp = ft_strtrim(str, "'");
+		free(str);
+		return (tmp);
+	}
+	return (str);
 }
 
 char	**ft_split_args(char *str)
@@ -77,6 +111,7 @@ char	**ft_split_args(char *str)
 		{
 			len = get_length(str);
 			args[i] = ft_substr(str, 0, len);
+			args[i] = ft_trim_quotes(args[i]);
 			i++;
 			str += len;
 		}
