@@ -6,28 +6,11 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/31 10:50:34 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/31 13:41:22 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"pipex.h"
-
-/* Check the argument number */
-static void	check_argc(int argc)
-{
-	if (argc > 5)
-	{
-		errno = E2BIG;
-		perror("Error");
-		exit(errno);
-	}
-	if (argc < 5)
-	{
-		errno = EINVAL;
-		perror("Error");
-		exit(errno);
-	}
-}
 
 /* Check arguments array */
 /* static void	check_args_value(t_paths p)
@@ -51,14 +34,23 @@ static void	check_argc(int argc)
 	exit(0);
 } */
 
-/* return (EXIT_SUCCESS); */
-/* int	main(void)
+/* Check the argument number */
+static void	check_argc(int argc)
 {
-	char *argv[] = {"awk", "{print $4}", "infile", (char *) 0};
-	char *envp[] = {(char *) 0};
+	if (argc > 5)
+	{
+		errno = E2BIG;
+		perror("Error");
+		exit(errno);
+	}
+	if (argc < 5)
+	{
+		errno = EINVAL;
+		perror("Error");
+		exit(errno);
+	}
+}
 
-	execve("/usr/bin/awk", argv, envp);
-} */
 int	main(int argc, char **argv, char **envp)
 {
 	t_descriptors	d;
@@ -68,7 +60,7 @@ int	main(int argc, char **argv, char **envp)
 	check_argc(argc);
 	d.file = open(argv[1], O_RDONLY);
 	if (d.file == -1)
-		exit_error(NULL, "info", errno);
+		exit_no_infile(argv);
 	p.args = ft_split_args(argv[2]);
 	p.argv = argv;
 	p.envp = envp;
@@ -85,5 +77,5 @@ int	main(int argc, char **argv, char **envp)
 		exec_parent(d, &p);
 	close(d.file);
 	free_structs(&p, FREE_ALL);
-	return (i);
+	return (EXIT_SUCCESS);
 }

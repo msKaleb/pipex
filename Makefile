@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 16:14:08 by msoria-j          #+#    #+#              #
-#    Updated: 2023/03/29 17:20:40 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/03/31 13:06:51 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME		=	pipex
 CC			=	gcc
 
 SRCS		=	main.c \
+				pipex.c \
 				ft_split_args.c \
 				ft_utils.c \
 

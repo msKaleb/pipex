@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:32:26 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/28 11:08:19 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/31 13:50:05 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ static int	print_adr(unsigned long long p)
 	ret = write(1, s, ft_strlen(s)) + 1;
 	free(s);
 	return (ret);
+}
+int	print_str_err(char *s)
+{
+	if (!s)
+		return (write(2, "(null)", 6) - 1);
+	return (write(2, s, ft_strlen(s)) - 1);
 }
 
 static int	choose_format(va_list ap, char format)
