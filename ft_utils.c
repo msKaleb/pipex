@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 13:59:36 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/31 13:49:46 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:21:55 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,18 @@ void	exit_no_infile(char **argv)
 		exit(errno);
 	}
 	write(fd, "0\n", 2);
-	close(fd);
-	ft_printf("%s: %s: ",ft_strchr(argv[0], '/') + 1, argv[1]); //stderr
+	ft_fprintf(2, "%s: line 1: %s: ", ft_strchr(argv[0], '/') + 1, argv[1]);
 	perror("");
+	close(fd);
 	exit(0);
+}
+
+void	exit_no_cmd(t_paths *p, char *err)
+{
+	ft_fprintf(2, "%s: line 1: %s: ", ft_strchr(p->argv[0], '/') + 1, err);
+	ft_fprintf(2, "command not found\n");
+	free_structs(p, FREE_ALL);
+	exit(ECMD_NOT_FOUND);
 }
 
 /* Function to free alloc'd data */

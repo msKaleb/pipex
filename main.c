@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/31 13:41:22 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:36:33 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 	i = -1;
 	while (p.args[i++])
-		ft_printf("arg: %s\n", p.args[i]);
+		ft_fprintf(1, "arg: %s\n", p.args[i]);
 	exit(0);
 } */
 
@@ -30,7 +30,7 @@
 
 	i = -1;
 	while (p.paths[i++])
-		ft_printf("path: %s\n", p.paths[i]);
+		ft_fprintf(1, "path: %s\n", p.paths[i]);
 	exit(0);
 } */
 

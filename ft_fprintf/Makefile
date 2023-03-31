@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
+#    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 17:56:18 by msoria-j          #+#    #+#              #
-#    Updated: 2023/03/10 16:31:49 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/03/31 14:32:29 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME		=	libftprintf.a
 
 SUBDIRS		=	libft
 
-SRCS		=	ft_printf.c \
+SRCS		=	ft_fprintf.c \
 				change_base.c \
 				print_var.c \
 				ft_itoa_u.c

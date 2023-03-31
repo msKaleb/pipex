@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_fprintf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef ft_fprintf_H
+# define ft_fprintf_H
 
 # include<stdarg.h>
 # include<unistd.h>
@@ -19,11 +19,11 @@
 
 char	*change_base(unsigned long long nbr, char base);
 char	*ft_itoa_u(unsigned int n);
-int		print_char(char c);
-int		print_str(char *s);
-int		print_hex(unsigned int p, char format);
-int		print_uint(unsigned int u);
-int		print_int(int d, char arg);
-int		ft_printf(char const *format, ...);
+int		print_char(int fd, char c);
+int		print_str(int fd, char *s);
+int		print_hex(int fd, unsigned int p, char format);
+int		print_uint(int fd, unsigned int u);
+int		print_int(int fd, int d, char arg);
+int		ft_fprintf(int fd, char const *format, ...);
 
 #endif

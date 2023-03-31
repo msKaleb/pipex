@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 16:14:08 by msoria-j          #+#    #+#              #
-#    Updated: 2023/03/31 13:06:51 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/03/31 14:32:29 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,9 @@ CFLAGS		=	-Wall -Werror -Wextra
 
 OBJS		=	$(SRCS:.c=.o)
 
-SUBDIRS		=	ft_printf
+SUBDIRS		=	ft_fprintf
 
-FT_PRINTF	=	$(SUBDIRS)/libftprintf.a
+ft_fprintf	=	$(SUBDIRS)/libftprintf.a
 
 ifndef VERBOSE
 #	MAKEFLAGS += --silent
@@ -35,8 +35,8 @@ endif
 									  
 $(NAME):		$(OBJS)
 				@make -C $(SUBDIRS)
-#				mv $(FT_PRINTF)
-				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(FT_PRINTF)
+#				mv $(ft_fprintf)
+				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(ft_fprintf)
 
 all:			$(NAME)
 

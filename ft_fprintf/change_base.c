@@ -6,11 +6,11 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:20:31 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/28 11:08:08 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:32:29 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"ft_printf.h"
+#include"ft_fprintf.h"
 
 static void	rev_str(char *str, int len)
 {
