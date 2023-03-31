@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/30 17:32:46 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/31 10:13:38 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	check_argc(int argc)
 }
 
 /* Check arguments array */
-void	check_args_value(t_paths p)
+/* static void	check_args_value(t_paths p)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ void	check_args_value(t_paths p)
 	while (p.args[i++])
 		ft_printf("arg: %s\n", p.args[i]);
 	exit(0);
-}
+} */
 
 /* Check paths array */
 /* static void	check_paths_value(t_paths p)
@@ -70,7 +70,6 @@ int	main(int argc, char **argv, char **envp)
 	if (d.file == -1)
 		exit_error(NULL, "Error opening input file", errno);
 	p.args = ft_split_args(argv[2]);
-	// check_args_value(p);
 	p.argv = argv;
 	p.envp = envp;
 	i = 0;

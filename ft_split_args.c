@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:36 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/30 17:52:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/31 10:12:51 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,14 @@ static int	get_length(char *str)
 	return (len);
 }
 
-static char *ft_trim_quotes(char *str)
+static char	*ft_trim_quotes(char *str)
 {
-	char 	*tmp;
+	char	*tmp;
 	int		check;
 
 	check = ft_strlen(ft_strchr(str, 34)) - ft_strlen(ft_strchr(str, 39));
-	ft_printf("len: %d\n", check);
 	if (check == -1)
-	{
-		//puta mierda
-	}
+		return (NULL);
 	if (ft_strchr(str, 34) || check == 1)
 	{
 		tmp = ft_strtrim(str, "\"");
@@ -91,6 +88,16 @@ static char *ft_trim_quotes(char *str)
 		return (tmp);
 	}
 	return (str);
+}
+
+char	**ft_invalidate_cmd(char **args)
+{
+	t_paths	p;
+
+	p.args = args;
+	free_structs(&p, FREE_ARGS);
+	p.args = ft_split_args("cat");
+	return (p.args);
 }
 
 char	**ft_split_args(char *str)
@@ -112,6 +119,8 @@ char	**ft_split_args(char *str)
 			len = get_length(str);
 			args[i] = ft_substr(str, 0, len);
 			args[i] = ft_trim_quotes(args[i]);
+			if (!args[i])
+				args = ft_invalidate_cmd(args);
 			i++;
 			str += len;
 		}
