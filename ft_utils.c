@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 13:59:36 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/30 17:17:15 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/31 10:50:03 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	exec_cmd(t_paths *p)
 		free(p->cmd);
 		p->cmd = NULL;
 	}
-	exit_error(p, "Error on command", errno);
+	exit_error(p, "command not found", errno);
 }
 
 void	exec_child(t_descriptors d, t_paths *p)

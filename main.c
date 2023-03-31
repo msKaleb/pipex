@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/31 10:13:38 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/31 10:50:34 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv, char **envp)
 	check_argc(argc);
 	d.file = open(argv[1], O_RDONLY);
 	if (d.file == -1)
-		exit_error(NULL, "Error opening input file", errno);
+		exit_error(NULL, "info", errno);
 	p.args = ft_split_args(argv[2]);
 	p.argv = argv;
 	p.envp = envp;
