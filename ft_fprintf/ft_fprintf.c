@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fprintf.c                                        :+:      :+:    :+:   */
+/*   ft_fprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:32:26 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/03/31 13:50:05 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/31 16:15:38 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,28 +66,3 @@ int	ft_fprintf(int fd, char const *format, ...)
 	va_end(ap);
 	return (ret);
 }
-
-/*
-#include<stdio.h>
-
-int	main(void)
-{
-	unsigned int	u;
-	char			c;
-	char			s[] = "test ft_fprintf";
-	int				d;
-	int				pret;
-
-	c = 'z';
-	d = -12;
-	u = 69548;
-	pret = printf("   printf: %c | %i | %x | %X | %s | %p", c, d, u, u, s, &c);
-	//pret = printf("Porque putnbr() y putstr()\t no son suficientes");
-	//pret = printf("   printf: %X %%%%", u);
-	printf("\tres: %d\n", pret);
-	pret = ft_fprintf(1, "ft_fprintf: %c | %i | %x | %X | %s | %p", c, d, u, u, s, &c);
-	//pret = ft_fprintf(1, "Porque putnbr() y putstr()\t no son suficientes");
-	//pret = ft_fprintf(1, "ft_fprintf: %X %%%%", u);
-	ft_fprintf(1, "\tres: %d\n", pret);
-}
-*/

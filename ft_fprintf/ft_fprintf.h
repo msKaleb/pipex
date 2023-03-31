@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fprintf.h                                        :+:      :+:    :+:   */
+/*   ft_fprintf.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:28:56 by msoria-j          #+#    #+#             */
-/*   Updated: 2022/12/18 19:29:43 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/03/31 16:16:25 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ft_fprintf_H
-# define ft_fprintf_H
+#ifndef FT_FPRINTF_H
+# define FT_FPRINTF_H
 
 # include<stdarg.h>
 # include<unistd.h>
