@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:05:28 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/01 13:50:06 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/02 13:46:39 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"pipex.h"
+#include"pipex_bonus.h"
 
 void	exec_cmd(t_paths *p, char *cmd)
 {
@@ -40,6 +40,11 @@ void	exec_cmd(t_paths *p, char *cmd)
 void	exec_child(t_descriptors d, t_paths *p)
 {
 	close(d.pipe_fd[0]);
+	d.file = open(p->argv[1], O_RDONLY);
+	if (d.file == -1)
+		exit_no_infile(p->argv);
+	
+	p->args = ft_split_args(p->argv[2]);
 	dup2(d.file, STDIN_FILENO);
 	close(d.file);
 	dup2(d.pipe_fd[1], STDOUT_FILENO);

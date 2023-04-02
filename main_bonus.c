@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/02 12:56:23 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/02 13:32:22 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"pipex.h"
+#include"pipex_bonus.h"
 
 /* Check arguments array */
 /* static void	check_args_value(t_paths p)
@@ -58,10 +58,6 @@ int	main(int argc, char **argv, char **envp)
 	int				i;
 
 	check_argc(argc);
-	d.file = open(argv[1], O_RDONLY);
-	if (d.file == -1)
-		exit_no_infile(argv);
-	p.args = ft_split_args(argv[2]);
 	p.argv = argv;
 	p.envp = envp;
 	i = 0;
@@ -75,7 +71,6 @@ int	main(int argc, char **argv, char **envp)
 		exec_child(d, &p);
 	else
 		exec_parent(d, &p);
-	close(d.file);
 	free_structs(&p, FREE_ALL);
 	return (EXIT_SUCCESS);
 }
