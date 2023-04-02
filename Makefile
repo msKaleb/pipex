@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 16:14:08 by msoria-j          #+#    #+#              #
-#    Updated: 2023/04/02 13:21:48 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/04/02 14:37:52 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ SRCS		=	main.c \
 				ft_split_args.c \
 				ft_utils.c \
 
-BONUS		=	ft_split_args_bonus.c \
-				ft_utils_bonus.c \
-				main_bonus.c \
+BONUS		=	main_bonus.c \
 				pipex_bonus.c \
+				ft_split_args_bonus.c \
+				ft_utils_bonus.c \
 				
 CFLAGS		=	-Wall -Werror -Wextra
 
@@ -49,7 +49,7 @@ all:			$(NAME)
 
 clean:
 				@make clean -C $(SUBDIRS)
-				@$(RM) $(OBJS)
+				@$(RM) $(OBJS) $(BOBJS)
 
 fclean:			clean
 				@make fclean -C $(SUBDIRS)

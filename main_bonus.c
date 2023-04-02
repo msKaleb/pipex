@@ -5,34 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/02 13:32:22 by msoria-j         ###   ########.fr       */
+/*   Created: 2023/04/02 14:55:08 by msoria-j          #+#    #+#             */
+/*   Updated: 2023/04/02 15:17:11 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"pipex_bonus.h"
-
-/* Check arguments array */
-/* static void	check_args_value(t_paths p)
-{
-	int	i;
-
-	i = -1;
-	while (p.args[i++])
-		ft_fprintf(1, "arg: %s\n", p.args[i]);
-	exit(0);
-} */
-
-/* Check paths array */
-/* static void	check_paths_value(t_paths p)
-{
-	int	i;
-
-	i = -1;
-	while (p.paths[i++])
-		ft_fprintf(1, "path: %s\n", p.paths[i]);
-	exit(0);
-} */
+#include "pipex_bonus.h"
 
 /* Check the argument number */
 static void	check_argc(int argc)

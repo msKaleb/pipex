@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:05:28 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/02 13:46:39 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/02 15:19:45 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	exec_child(t_descriptors d, t_paths *p)
 	d.file = open(p->argv[1], O_RDONLY);
 	if (d.file == -1)
 		exit_no_infile(p->argv);
-	
 	p->args = ft_split_args(p->argv[2]);
 	dup2(d.file, STDIN_FILENO);
 	close(d.file);
@@ -55,7 +54,7 @@ void	exec_child(t_descriptors d, t_paths *p)
 void	exec_parent(t_descriptors d, t_paths *p)
 {
 	close(d.pipe_fd[1]);
-	free_structs(p, FREE_ARGS);
+	// free_structs(p, FREE_ARGS); // casca akí
 	p->args = ft_split_args(p->argv[3]);
 	dup2(d.pipe_fd[0], STDIN_FILENO);
 	close(d.pipe_fd[0]);
