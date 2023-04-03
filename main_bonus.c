@@ -6,60 +6,75 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:55:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/03 11:58:23 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:59:18 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./pipex_bonus.h"
 
-void	here_doc(char *outfile, char *limiter)
+void	exec_here_doc(t_paths *p, char *buf)
 {
-	int		fd;
-	int		i, j;
-	char	*buffer;
+	t_descriptors	d;
 	
-	buffer = ft_calloc(1, 1000 * sizeof(buffer));
-	ft_fprintf(2, "Limiter: %s\n", limiter);
-	fd = open(outfile, O_RDWR | O_CREAT | O_APPEND);
-	i = -1;
-	j = 0;
-	while (++i < 1000)
+	pipe(d.pipe_fd);
+	d.fork_id = fork();
+	waitpid(d.fork_id, NULL, WNOHANG);
+	p->args = ft_split_args(p->argv[3]);
+	if (d.fork_id == 0)
 	{
-		read(STDIN_FILENO, buffer, 1);
-		if (*buffer == '\n')
+		ft_fprintf(d.pipe_fd[1], "%s", buf);
+		// close(d.pipe_fd[1]);
+		dup2(d.pipe_fd[0], STDIN_FILENO);
+		close(d.pipe_fd[0]);
+		/* dup2(d.pipe_fd[1], STDOUT_FILENO);
+		close(d.pipe_fd[1]); */
+		exec_cmd(p, p->args[0]);
+	}
+	else
+	{
+		close(d.pipe_fd[1]);
+		p->args = ft_split_args(p->argv[4]);
+		d.file = open(p->argv[5], O_WRONLY | O_CREAT | O_APPEND, 664);
+		dup2(d.pipe_fd[0], STDIN_FILENO);
+		close(d.pipe_fd[0]);
+		dup2(d.file, STDOUT_FILENO);
+		close(d.file);
+		exec_cmd(p, p->args[0]);
+	}
+}
+
+/* Put into a temporary file what later will be the input for execve */
+void	here_doc(t_paths *p)
+{
+	t_vars	v;
+
+	v.buf = ft_calloc(1, 1000 * sizeof(v.buf));
+	v.i = -1;
+	v.j = 0;
+	while (++v.i < 1000)
+	{
+		read(STDIN_FILENO, v.buf, 1);
+		if (*v.buf == '\n')
 		{
-			buffer++;
-			i++;
-			j += i;
-			if (ft_strnstr(buffer - i, limiter, ft_strlen(limiter)))
+			v.buf++;
+			v.i++;
+			v.j += v.i;
+			if (ft_strnstr(v.buf - v.i, p->argv[2], ft_strlen(p->argv[2])))
 				break ;
 			else
-			{
-				// ft_fprintf(fd, "%s", buffer - j); // cambiar por execve
-				i = -1;
-				/* free(buffer);
-				buffer = ft_calloc(1, 1000 * sizeof(buffer)); */
-			}
+				v.i = -1;
 		}
 		else
-			buffer++;
+			v.buf++;
 	}
-	// ft_fprintf(2, "j - i: %d\n%s\n", j - i, buffer - j);
-	buffer -= j;
-	buffer[j - i] = '\0';
-	ft_fprintf(fd, "%s\n", buffer);
-	
-	free(buffer);
-	close(fd);
-	exit(0);
+	v.buf -= v.j;
+	v.buf[v.j - v.i] = '\0';
+	exec_here_doc(p, v.buf);
 }
 
 /* Check the argument number */
-static void	check_argc(int argc, char **argv)
+static void	check_argc(int argc)
 {
-	if (ft_strnstr(argv[1], "here_doc", 8))
-		// ft_fprintf(2, "here_doc\n");
-		here_doc(argv[argc - 1], argv[2]);
 	if (argc < 5)
 	{
 		errno = EINVAL;
@@ -72,18 +87,21 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_descriptors	d;
 	t_paths			p;
-	int				i;
-
-	check_argc(argc, argv);
+	t_vars			v;
+	
+	v.i = 0;
+	while (ft_strnstr(envp[v.i], "PATH", 4) == 0)
+		v.i++;
+	p.paths = ft_split(envp[v.i] + 5, ':');
 	p.argv = argv;
 	p.envp = envp;
-	i = 0;
-	while (ft_strnstr(envp[i], "PATH", 4) == 0)
-		i++;
-	p.paths = ft_split(envp[i] + 5, ':');
+	check_argc(argc);
+	if (ft_strnstr(argv[1], "here_doc", 8))
+		here_doc(&p);
 	pipe(d.pipe_fd);
 	d.fork_id = fork();
-	waitpid(d.fork_id, &i, WNOHANG);
+	waitpid(d.fork_id, &v.i, WNOHANG);
+	p.input = p.argv[1];
 	if (d.fork_id == 0)
 		exec_child(d, &p);
 	else

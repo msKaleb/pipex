@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 19:37:32 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/02 14:52:24 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:56:39 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@
 # include <errno.h>
 # include <sys/wait.h>
 
+typedef struct s_vars
+{
+	int		i;
+	int		j;
+	char	*buf;
+}				t_vars;
+
 typedef struct s_paths
 {
 	char	**paths;
@@ -34,6 +41,7 @@ typedef struct s_paths
 	char	**argv;
 	char	**envp;
 	char	*cmd;
+	char	*input;
 }				t_paths;
 
 typedef struct s_descriptors
