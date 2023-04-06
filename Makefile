@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 16:14:08 by msoria-j          #+#    #+#              #
-#    Updated: 2023/04/02 14:37:52 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/04/06 09:56:25 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,4 +61,4 @@ bonus:			$(BOBJS)
 				@make -C $(SUBDIRS)
 				@$(CC) $(CFLAGS) -o $(NAME) $(BOBJS) $(ft_fprintf)
 				
-.PHONY:			all clean fclean re
+.PHONY:			all clean fclean re bonus

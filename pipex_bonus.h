@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 19:37:32 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/05 10:41:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/06 09:59:24 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_paths
 	char	**envp;
 	char	*cmd;
 	char	*input;
+	int		argc;
 }				t_paths;
 
 typedef struct s_descriptors

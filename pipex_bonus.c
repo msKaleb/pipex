@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:05:28 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/05 12:11:52 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/06 16:13:09 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	exec_cmd(t_paths *p, char *cmd)
 
 void	exec_child(t_descriptors d, t_paths *p, int index)
 {
-	// ft_fprintf(2, "index: %d\n", index);
 	p->args = ft_split_args(p->argv[index]);
 	close(d.pipe_fd[0]);
 	d.file = open(p->input, O_RDONLY);
 	if (d.file == -1)
-		exit_no_infile(p->argv);
+		exit_no_infile(p->argv); // pasar p (p->argv[p->argc - 1])
+	// ft_fprintf(2, "fd: %d - file: %s\n", d.file, p->input);
 	dup2(d.file, STDIN_FILENO);
 	close(d.file);
 	dup2(d.pipe_fd[1], STDOUT_FILENO);
@@ -54,15 +54,19 @@ void	exec_child(t_descriptors d, t_paths *p, int index)
 
 void	exec_parent(t_descriptors d, t_paths *p, int index)
 {
+	waitpid(d.fork_id, NULL, WNOHANG);
+	// perror("keh");
 	close(d.pipe_fd[1]);
-	// free_structs(p, FREE_ARGS); // casca akí
 	p->args = ft_split_args(p->argv[index]);
 	dup2(d.pipe_fd[0], STDIN_FILENO);
 	close(d.pipe_fd[0]);
-	d.file = open(p->argv[5], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	d.file = open(p->argv[p->argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (d.file == -1)
 		exit_error(p, "Error on parent process", errno);
 	dup2(d.file, STDOUT_FILENO);
 	close(d.file);
+	// ft_fprintf(2, "fd: %d - cmd: %s\n", d.file, p->args[0]);
+	if (access("tmp", F_OK) == 0)
+		unlink("tmp");
 	exec_cmd(p, p->args[0]);
 }
