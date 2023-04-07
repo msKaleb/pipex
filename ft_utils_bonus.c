@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 13:59:36 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/02 13:43:55 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:18:22 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	exit_no_infile(char **argv)
 	close(fd);
 	exit(0);
 }
+
 /* TODO: check and compare with bash output */
 void	exit_no_envp(char **argv)
 {

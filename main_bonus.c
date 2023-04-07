@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:55:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/06 16:13:09 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:18:22 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_paths	init_pvar(int argc, char **argv, char **envp)
 {
 	t_paths	p;
 	int		i;
-	
+
 	i = 0;
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
@@ -77,27 +77,29 @@ t_paths	init_pvar(int argc, char **argv, char **envp)
 	return (p);
 }
 
+// exit_no_infile(p.argv); // pasar p (p.argv[p.argc - 1])
 int	main(int argc, char **argv, char **envp)
 {
 	t_descriptors	d;
 	t_paths			p;
 	int				arg;
-	
-	arg = 2;
+
+	arg = 1;
 	check_argc(argc);
 	p = init_pvar(argc, argv, envp);
 	if (ft_strnstr(argv[1], "here_doc", 8))
 	{
 		here_doc(&p);
-		arg = 3;
+		arg = 2;
 	}
-	pipe(d.pipe_fd);
-	d.fork_id = fork();
-	if (d.fork_id == 0)
+	d.file = open(p.input, O_RDONLY);
+	if (d.file == -1)
+		exit_no_infile(p.argv);
+	dup2(d.file, STDIN_FILENO);
+	close(d.file);
+	while (++arg < p.argc - 2)
 		exec_child(d, &p, arg);
-	else
-		exec_parent(d, &p, arg + 1);
+	exec_parent(d, &p, arg);
 	free_structs(&p, FREE_ALL);
-	ft_fprintf(2, "%d\n", arg);
 	return (EXIT_SUCCESS);
 }
