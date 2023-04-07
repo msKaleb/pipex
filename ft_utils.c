@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 13:59:36 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/07 11:18:22 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:38:24 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	exit_no_infile(char **argv)
 		perror("Error");
 		exit(errno);
 	}
-	write(fd, "0\n", 2);
+	write(fd, "       0\n", 9);
 	ft_fprintf(2, "%s: line 1: %s: ", ft_strchr(argv[0], '/') + 1, argv[1]);
 	perror("");
 	close(fd);

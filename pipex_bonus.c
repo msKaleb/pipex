@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:05:28 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/07 11:18:22 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:12:40 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,5 @@ void	exec_parent(t_descriptors d, t_paths *p, int index)
 		exit_error(p, "Error on parent process", errno);
 	dup2(d.file, STDOUT_FILENO);
 	close(d.file);
-	if (access("tmp", F_OK) == 0)
-		unlink("tmp");
 	exec_cmd(p, p->args[0]);
 }

@@ -3,23 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:55:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/07 11:18:22 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:28:01 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./pipex_bonus.h"
 
-void	exec_here_doc(t_paths *p, char *buf)
+/* Every time a fork is done, the execution has to finish, */
+/* either via execve or via exit()*/
+void	exec_here_doc(char *buf)
 {
 	t_descriptors	d;
 
-	ft_strlcpy(p->input, "tmp", 4);
-	d.file = open("tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	ft_fprintf(d.file, "%s", buf);
-	close(d.file);
+	pipe(d.pipe_fd);
+	d.fork_id = fork();
+	if (d.fork_id == 0)
+	{
+		ft_fprintf(d.pipe_fd[1], "%s", buf);
+		free(buf);
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		close(d.pipe_fd[1]);
+		dup2(d.pipe_fd[0], STDIN_FILENO);
+		close(d.pipe_fd[0]);
+		waitpid(d.fork_id, NULL, WNOHANG);
+	}
 }
 
 void	here_doc(t_paths *p)
@@ -47,7 +60,7 @@ void	here_doc(t_paths *p)
 	}
 	v.buf -= v.j;
 	v.buf[v.j - v.i] = '\0';
-	exec_here_doc(p, v.buf);
+	exec_here_doc(v.buf);
 }
 
 /* Check the argument number */
@@ -92,11 +105,14 @@ int	main(int argc, char **argv, char **envp)
 		here_doc(&p);
 		arg = 2;
 	}
-	d.file = open(p.input, O_RDONLY);
-	if (d.file == -1)
-		exit_no_infile(p.argv);
-	dup2(d.file, STDIN_FILENO);
-	close(d.file);
+	else
+	{
+		d.file = open(p.input, O_RDONLY);
+		if (d.file == -1)
+			exit_no_infile(&p);
+		dup2(d.file, STDIN_FILENO);
+		close(d.file);
+	}
 	while (++arg < p.argc - 2)
 		exec_child(d, &p, arg);
 	exec_parent(d, &p, arg);

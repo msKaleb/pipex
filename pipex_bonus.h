@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 19:37:32 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/06 09:59:24 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:27:51 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	exec_cmd(t_paths *p, char *cmd);
 void	exec_child(t_descriptors d, t_paths *p, int index);
 void	exec_parent(t_descriptors d, t_paths *p, int index);
 char	**ft_split_args(char *str);
-void	exit_no_infile(char **argv);
+void	exit_no_infile(t_paths *p);
 void	exit_no_cmd(t_paths *p, char *err);
 void	exit_no_envp(char **argv);
 
