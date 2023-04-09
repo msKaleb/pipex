@@ -6,9 +6,21 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 16:14:08 by msoria-j          #+#    #+#              #
-#    Updated: 2023/04/06 09:56:25 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/04/09 19:11:05 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+define HEADER
+
+██████╗ ██╗██████╗ ███████╗██╗  ██╗
+██╔══██╗██║██╔══██╗██╔════╝╚██╗██╔╝
+██████╔╝██║██████╔╝█████╗   ╚███╔╝ 
+██╔═══╝ ██║██╔═══╝ ██╔══╝   ██╔██╗ 
+██║     ██║██║     ███████╗██╔╝ ██╗
+╚═╝     ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝
+
+endef
+export HEADER
 
 NAME		=	pipex
 
@@ -34,31 +46,48 @@ SUBDIRS		=	ft_fprintf
 
 ft_fprintf	=	$(SUBDIRS)/libftprintf.a
 
+#Define colors for output
+NONE='\033[0m'
+GREEN='\033[32m'
+GRAY='\033[2;37m'
+RED='\033[31m'
+CYAN='\033[36m'
+MAGENTA="\033[35m"
+BLUE="\033[34m"
+ITALIC="\033[3m"
+
 ifndef VERBOSE
-#	MAKEFLAGS += --silent
-	MAKEFLAGS += --no-print-directory
+	MAKEFLAGS += --silent
+#	MAKEFLAGS += --no-print-directory
 endif
 
 									  
 $(NAME):		$(OBJS)
-				@make -C $(SUBDIRS)
-#				mv $(ft_fprintf)
+				@echo -e $(CYAN) "$$HEADER" $(NONE)
+				@echo -e $(GREEN)$(ITALIC) "Compiling $(NAME)..."$(NONE)
+				@make -sC $(SUBDIRS)
 				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(ft_fprintf)
 
 all:			$(NAME)
 
 clean:
-				@make clean -C $(SUBDIRS)
+				@echo -e $(RED)$(ITALIC) "	cleaning $(NAME) object files..." $(NONE)
+				@make clean -sC $(SUBDIRS)
 				@$(RM) $(OBJS) $(BOBJS)
 
 fclean:			clean
-				@make fclean -C $(SUBDIRS)
+				@echo -e $(RED)$(ITALIC) "	removing $(NAME) file..." $(NONE)
+				@make fclean -sC $(SUBDIRS)
 				@$(RM) $(NAME)
 
 re:				fclean $(NAME)
 
+rebonus:		fclean bonus
+
 bonus:			$(BOBJS)
-				@make -C $(SUBDIRS)
+				@echo -e $(BLUE) "$$HEADER" $(NONE)
+				@echo -e $(MAGENTA)$(ITALIC) "	Compiling $(NAME) (Bonus)..."$(NONE)
+				@make -sC $(SUBDIRS)
 				@$(CC) $(CFLAGS) -o $(NAME) $(BOBJS) $(ft_fprintf)
 				
 .PHONY:			all clean fclean re bonus
