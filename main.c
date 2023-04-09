@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/02 12:56:23 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/09 19:22:17 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	check_argc(int argc)
 		exit(errno);
 	}
 }
-
+ /* Check pipe and fork returns, check O_APPEND and O_TRUNCATE */
 int	main(int argc, char **argv, char **envp)
 {
 	t_descriptors	d;

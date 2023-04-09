@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:55:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/07 17:28:01 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/09 19:22:17 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ void	exec_here_doc(char *buf)
 {
 	t_descriptors	d;
 
-	pipe(d.pipe_fd);
+	if (pipe(d.pipe_fd) == -1)
+		exit(EXIT_FAILURE);
 	d.fork_id = fork();
+	if (d.fork_id == -1)
+		exit(EXIT_FAILURE);
 	if (d.fork_id == 0)
 	{
 		ft_fprintf(d.pipe_fd[1], "%s", buf);
@@ -90,7 +93,7 @@ t_paths	init_pvar(int argc, char **argv, char **envp)
 	return (p);
 }
 
-// exit_no_infile(p.argv); // pasar p (p.argv[p.argc - 1])
+ /* Check pipe and fork returns, check O_APPEND and O_TRUNCATE */
 int	main(int argc, char **argv, char **envp)
 {
 	t_descriptors	d;
