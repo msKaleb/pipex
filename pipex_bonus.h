@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 19:37:32 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/07 17:27:51 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:32:54 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_paths
 	char	*cmd;
 	char	*input;
 	int		argc;
+	int		mode;
 }				t_paths;
 
 typedef struct s_descriptors
@@ -61,5 +62,8 @@ char	**ft_split_args(char *str);
 void	exit_no_infile(t_paths *p);
 void	exit_no_cmd(t_paths *p, char *err);
 void	exit_no_envp(char **argv);
+void	here_doc(t_paths *p);
+void	exec_here_doc(char *buf);
+int		open_file(t_paths *p, int mode);
 
 #endif

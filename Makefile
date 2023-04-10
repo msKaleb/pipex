@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 16:14:08 by msoria-j          #+#    #+#              #
-#    Updated: 2023/04/09 19:11:05 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/04/10 08:13:17 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ endif
 									  
 $(NAME):		$(OBJS)
 				@echo -e $(CYAN) "$$HEADER" $(NONE)
-				@echo -e $(GREEN)$(ITALIC) "Compiling $(NAME)..."$(NONE)
+				@echo -e $(GREEN)$(ITALIC) "	Compiling $(NAME)..."$(NONE)
 				@make -sC $(SUBDIRS)
 				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(ft_fprintf)
 
