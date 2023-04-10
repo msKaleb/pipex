@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:05:28 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/10 08:32:48 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:26:31 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ void	exec_cmd(t_paths *p, char *cmd)
 
 void	exec_child(t_descriptors d, t_paths *p, int index)
 {
-	pipe(d.pipe_fd);
+	if (pipe(d.pipe_fd) == -1)
+		exit(EXIT_FAILURE);
 	d.fork_id = fork();
+	if (d.fork_id == -1)
+		exit(EXIT_FAILURE);
 	if (d.fork_id == 0)
 	{
 		p->args = ft_split_args(p->argv[index]);

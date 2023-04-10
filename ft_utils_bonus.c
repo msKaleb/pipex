@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 13:59:36 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/07 17:36:11 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:55:07 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	exit_error(t_paths *p, char *str, int err_code)
 }
 
 /* TODO: check and compare with bash output */
-/* ft_fprintf(2, "%s: line 1: %s: ", ft_strchr(argv[0], '/') + 1, argv[1]); */
 void	exit_no_infile(t_paths *p)
 {
 	int		fd;
@@ -33,7 +32,7 @@ void	exit_no_infile(t_paths *p)
 		perror("Error");
 		exit(errno);
 	}
-	write(fd, "       0\n", 9);
+	write(fd, "0\n", 2);
 	ft_fprintf(2, "%s: %s: ", ft_strchr(p->argv[0], '/') + 1, p->argv[1]);
 	perror("");
 	close(fd);
@@ -57,7 +56,6 @@ void	exit_no_envp(char **argv)
 }
 
 /* TODO: check and compare with bash output */
-/* ft_fprintf(2, "%s: line 1: %s: ", ft_strchr(p->argv[0], '/') + 1, err); */
 void	exit_no_cmd(t_paths *p, char *err)
 {
 	ft_fprintf(2, "%s: %s: ", ft_strchr(p->argv[0], '/') + 1, err);

@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:55:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/10 08:38:18 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:56:10 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	open_file(t_paths *p, int mode)
 	{
 		fd = open(p->input, O_RDONLY);
 		if (fd == -1)
+		{
 			exit_no_infile(p);
+		}
 	}
 	if (mode == 1)
 	{
@@ -48,21 +50,19 @@ static void	check_argc(int argc)
 	}
 }
 
-t_paths	init_pvar(int argc, char **argv, char **envp)
+void	init_pvar(t_paths	*p, int argc, char **argv, char **envp)
 {
-	t_paths	p;
 	int		i;
 
 	i = 0;
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
-	p.paths = ft_split(envp[i] + 5, ':');
-	p.argv = argv;
-	p.input = p.argv[1];
-	p.envp = envp;
-	p.argc = argc;
-	p.mode = 1;
-	return (p);
+	p->paths = ft_split(envp[i] + 5, ':');
+	p->argv = argv;
+	p->input = p->argv[1];
+	p->envp = envp;
+	p->argc = argc;
+	p->mode = 1;
 }
 
 /* TODO: Check pipe and fork returns */
@@ -74,7 +74,7 @@ int	main(int argc, char **argv, char **envp)
 
 	arg = 1;
 	check_argc(argc);
-	p = init_pvar(argc, argv, envp);
+	init_pvar(&p, argc, argv, envp);
 	if (ft_strnstr(argv[1], "here_doc", 8))
 	{
 		here_doc(&p);

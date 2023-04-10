@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/10 08:38:37 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:31:17 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ static void	check_argc(int argc)
 	}
 }
 
+void	init_pipe(t_descriptors *d)
+{
+	if (pipe(d->pipe_fd) == -1)
+		exit(EXIT_FAILURE);
+	d->fork_id = fork();
+	if (d->fork_id == -1)
+		exit(EXIT_FAILURE);
+}
+
 /* TODO: Check pipe and fork returns */
 int	main(int argc, char **argv, char **envp)
 {
@@ -69,8 +78,7 @@ int	main(int argc, char **argv, char **envp)
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
 	p.paths = ft_split(envp[i] + 5, ':');
-	pipe(d.pipe_fd);
-	d.fork_id = fork();
+	init_pipe(&d);
 	waitpid(d.fork_id, &i, WNOHANG);
 	if (d.fork_id == 0)
 		exec_child(d, &p);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 13:59:36 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/07 17:38:24 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:40:28 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	exit_no_infile(char **argv)
 		perror("Error");
 		exit(errno);
 	}
-	write(fd, "       0\n", 9);
-	ft_fprintf(2, "%s: line 1: %s: ", ft_strchr(argv[0], '/') + 1, argv[1]);
+	write(fd, "0\n", 2);
+	ft_fprintf(2, "%s: %s: ", ft_strchr(argv[0], '/') + 1, argv[1]);
 	perror("");
 	close(fd);
 	exit(0);
@@ -57,7 +57,7 @@ void	exit_no_envp(char **argv)
 /* TODO: check and compare with bash output */
 void	exit_no_cmd(t_paths *p, char *err)
 {
-	ft_fprintf(2, "%s: line 1: %s: ", ft_strchr(p->argv[0], '/') + 1, err);
+	ft_fprintf(2, "%s: %s: ", ft_strchr(p->argv[0], '/') + 1, err);
 	ft_fprintf(2, "command not found\n");
 	free_structs(p, FREE_ALL);
 	exit(ECMD_NOT_FOUND);
