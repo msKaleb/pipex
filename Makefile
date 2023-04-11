@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 16:14:08 by msoria-j          #+#    #+#              #
-#    Updated: 2023/04/10 08:13:17 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/04/11 15:32:59 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,20 +63,20 @@ endif
 
 									  
 $(NAME):		$(OBJS)
-				@echo -e $(CYAN) "$$HEADER" $(NONE)
-				@echo -e $(GREEN)$(ITALIC) "	Compiling $(NAME)..."$(NONE)
+				@echo $(CYAN) "$$HEADER" $(NONE)
+				@echo $(GREEN)$(ITALIC) "	Compiling $(NAME)..."$(NONE)
 				@make -sC $(SUBDIRS)
 				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(ft_fprintf)
 
 all:			$(NAME)
 
 clean:
-				@echo -e $(RED)$(ITALIC) "	cleaning $(NAME) object files..." $(NONE)
+				@echo $(RED)$(ITALIC) "	cleaning $(NAME) object files..." $(NONE)
 				@make clean -sC $(SUBDIRS)
 				@$(RM) $(OBJS) $(BOBJS)
 
 fclean:			clean
-				@echo -e $(RED)$(ITALIC) "	removing $(NAME) file..." $(NONE)
+				@echo $(RED)$(ITALIC) "	removing $(NAME) file..." $(NONE)
 				@make fclean -sC $(SUBDIRS)
 				@$(RM) $(NAME)
 
@@ -85,8 +85,8 @@ re:				fclean $(NAME)
 rebonus:		fclean bonus
 
 bonus:			$(BOBJS)
-				@echo -e $(BLUE) "$$HEADER" $(NONE)
-				@echo -e $(MAGENTA)$(ITALIC) "	Compiling $(NAME) (Bonus)..."$(NONE)
+				@echo $(BLUE) "$$HEADER" $(NONE)
+				@echo $(MAGENTA)$(ITALIC) "	Compiling $(NAME) (Bonus)..."$(NONE)
 				@make -sC $(SUBDIRS)
 				@$(CC) $(CFLAGS) -o $(NAME) $(BOBJS) $(ft_fprintf)
 				

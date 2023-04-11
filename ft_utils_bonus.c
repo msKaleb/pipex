@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 13:59:36 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/10 10:55:07 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:12:29 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	exit_error(t_paths *p, char *str, int err_code)
 {
 	(void)str;
-	if (p)
-		free_structs(p, FREE_ALL);
+	if (!p)
+		exit(err_code);
+	free_structs(p, FREE_ALL);
 	perror(str);
 	exit(err_code);
 }
 
-/* TODO: check and compare with bash output */
 void	exit_no_infile(t_paths *p)
 {
 	int		fd;
@@ -32,14 +32,13 @@ void	exit_no_infile(t_paths *p)
 		perror("Error");
 		exit(errno);
 	}
-	write(fd, "0\n", 2);
+	write(fd, "       0\n", 9);
 	ft_fprintf(2, "%s: %s: ", ft_strchr(p->argv[0], '/') + 1, p->argv[1]);
 	perror("");
 	close(fd);
 	exit(EXIT_SUCCESS);
 }
 
-/* TODO: check and compare with bash output */
 void	exit_no_envp(char **argv)
 {
 	int		fd;
@@ -55,7 +54,6 @@ void	exit_no_envp(char **argv)
 	exit(EAGAIN);
 }
 
-/* TODO: check and compare with bash output */
 void	exit_no_cmd(t_paths *p, char *err)
 {
 	ft_fprintf(2, "%s: %s: ", ft_strchr(p->argv[0], '/') + 1, err);
@@ -83,6 +81,4 @@ void	free_structs(t_paths *p, int flag)
 			free(p->paths[i]);
 		free(p->paths);
 	}
-	if (flag & FREE_CMD)
-		free(p->cmd);
 }

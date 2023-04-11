@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:05:28 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/10 10:26:31 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:54:14 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	exec_cmd(t_paths *p, char *cmd)
 		exit_no_envp(p->argv);
 	if (access(p->args[0], F_OK | X_OK) == 0)
 		if (execve(p->args[0], p->args, p->envp) == -1)
-			exit_error(p, "Error on execve args[0]", errno);
+			exit_error(p, "Error", errno);
 	i = -1;
 	while (p->paths[++i])
 	{
@@ -30,7 +30,7 @@ void	exec_cmd(t_paths *p, char *cmd)
 		free(tmp_path);
 		if (access(p->cmd, F_OK | X_OK) == 0)
 			if (execve(p->cmd, p->args, p->envp) == -1)
-				exit_error(p, "Error on execve p->cmd", errno);
+				exit_error(p, "Error", errno);
 		free(p->cmd);
 		p->cmd = NULL;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/10 10:31:17 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:13:03 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	init_pipe(t_descriptors *d)
 		exit(EXIT_FAILURE);
 }
 
-/* TODO: Check pipe and fork returns */
 int	main(int argc, char **argv, char **envp)
 {
 	t_descriptors	d;

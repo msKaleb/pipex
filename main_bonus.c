@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:55:08 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/10 10:56:10 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:12:59 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	open_file(t_paths *p, int mode)
 	{
 		fd = open(p->argv[p->argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd == -1)
-			exit_error(p, "Error on parent process", errno);
+			exit_error(p, "Error", errno);
 	}
 	if (mode == 2)
 	{
 		fd = open(p->argv[p->argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd == -1)
-			exit_error(p, "Error on parent process", errno);
+			exit_error(p, "Error", errno);
 	}
 	return (fd);
 }
@@ -65,7 +65,6 @@ void	init_pvar(t_paths	*p, int argc, char **argv, char **envp)
 	p->mode = 1;
 }
 
-/* TODO: Check pipe and fork returns */
 int	main(int argc, char **argv, char **envp)
 {
 	t_descriptors	d;
